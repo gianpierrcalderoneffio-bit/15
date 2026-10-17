@@ -35,6 +35,104 @@
       position: relative;
     }
 
+    /* PANTALLA DE PORTADA / ENTRADA (SOBRE) */
+    #welcomeScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--rojo-profundo);
+      background-image: radial-gradient(circle at 50% 30%, #5b0609 0%, #1a0103 85%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+      padding: 20px;
+    }
+
+    #welcomeScreen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .welcome-card {
+      border: 2px solid var(--dorado-calido);
+      outline: 1px solid rgba(219, 183, 130, 0.4);
+      outline-offset: -8px;
+      border-radius: 28px;
+      padding: 40px 22px;
+      max-width: 380px;
+      width: 90%;
+      background: linear-gradient(180deg, rgba(91, 6, 9, 0.96) 0%, rgba(32, 1, 3, 0.98) 100%);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 30px rgba(219, 183, 130, 0.35);
+      text-align: center;
+      position: relative;
+    }
+
+    .welcome-crown {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 2px solid var(--dorado-calido);
+      box-shadow: 0 0 18px rgba(248, 225, 166, 0.8);
+      background: #ffffff;
+      padding: 5px;
+      margin: 0 auto 15px;
+    }
+
+    .welcome-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.6rem;
+      color: var(--dorado-brillo);
+      text-shadow: 0 0 15px rgba(248, 225, 166, 0.7);
+      margin-bottom: 4px;
+      font-weight: normal;
+    }
+
+    .welcome-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--crema-marfil);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    /* BOTÓN TIPO SELLO DE CERA DEDICADO */
+    .open-btn {
+      background: radial-gradient(circle, #dbb782 0%, #a67c42 100%);
+      border: 2px solid #f8e1a6;
+      border-radius: 50px;
+      padding: 15px 38px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(248, 225, 166, 0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 28px rgba(248, 225, 166, 0.9);
+    }
+
+    .open-btn span {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #200103;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
     /* EFECTO DE DESTELLOS FLOTANTES EN EL FONDO */
     .sparkle {
       position: fixed;
@@ -164,7 +262,7 @@
       background-repeat: no-repeat;
       border: 2px solid var(--dorado-calido);
       border-radius: 20px;
-      padding: 185px 82px 200px 82px; /* Espaciado calibrado para liberar rosas y filigranas */
+      padding: 185px 82px 200px 82px;
       margin: 22px 0;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 20px rgba(219, 183, 130, 0.35);
       position: relative;
@@ -491,6 +589,20 @@
 </head>
 <body>
 
+  <!-- PANTALLA PORTADA DE APERTURA (CUBIERTA / ENTRADA) -->
+  <div id="welcomeScreen">
+    <div class="welcome-card">
+      <img src="./corona.jpg" alt="Corona Real" class="welcome-crown">
+      <h1 class="welcome-title">Mis XV</h1>
+      <p class="welcome-subtitle">Maria Fernanda</p>
+      
+      <!-- BOTÓN PARA ABRIR E INICIAR MÚSICA -->
+      <button class="open-btn" onclick="openInvitation()">
+        <span>ABRIR ✉️</span>
+      </button>
+    </div>
+  </div>
+
   <!-- DESTELLOS DORADOS PARPADEANTES EN EL FONDO -->
   <div class="sparkle sp-1">✨</div>
   <div class="sparkle sp-2">✦</div>
@@ -627,8 +739,25 @@
 
   </div>
 
-  <!-- JavaScript para Música y Reloj -->
+  <!-- JavaScript para Abrir Portada, Música y Reloj -->
   <script>
+    // Función para ocultar la portada e iniciar la música al instante
+    function openInvitation() {
+      const welcomeScreen = document.getElementById('welcomeScreen');
+      welcomeScreen.classList.add('hidden');
+      
+      const music = document.getElementById('bgMusic');
+      const musicBtn = document.getElementById('musicBtn');
+      
+      if (music && music.paused) {
+        music.play().then(() => {
+          if (musicBtn) musicBtn.textContent = '❚❚';
+        }).catch(err => {
+          console.log("Aviso de reproducción de audio:", err);
+        });
+      }
+    }
+
     function toggleMusic() {
       const music = document.getElementById('bgMusic');
       const musicBtn = document.getElementById('musicBtn');
