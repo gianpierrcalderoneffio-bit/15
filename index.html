@@ -35,105 +35,110 @@
       position: relative;
     }
 
-    /* PANTALLA DE PORTADA / ENTRADA (SOBRE) */
+    /* =========================================================
+       PANTALLA DINÁMICA DE ENTRADA CON APERTURA.JPEG
+       ========================================================= */
     #welcomeScreen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: var(--rojo-profundo);
-      background-image: radial-gradient(circle at 50% 30%, #5b0609 0%, #1a0103 85%);
+      background: url('./apertura.jpeg') center center / cover no-repeat;
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-      padding: 20px;
+      justify-content: flex-end;
+      padding-bottom: 75px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease, filter 0.8s ease, visibility 0.9s ease;
     }
 
+    /* Animación al hacer clic: Zoom in + desenfoque de libro mágico */
     #welcomeScreen.hidden {
       opacity: 0;
+      transform: scale(1.15);
+      filter: blur(14px);
       visibility: hidden;
       pointer-events: none;
     }
 
-    .welcome-card {
-      border: 2px solid var(--dorado-calido);
-      outline: 1px solid rgba(219, 183, 130, 0.4);
-      outline-offset: -8px;
-      border-radius: 28px;
-      padding: 40px 22px;
-      max-width: 380px;
-      width: 90%;
-      background: linear-gradient(180deg, rgba(91, 6, 9, 0.96) 0%, rgba(32, 1, 3, 0.98) 100%);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 30px rgba(219, 183, 130, 0.35);
-      text-align: center;
+    /* Capa de destello suave y sombra ambiental */
+    .welcome-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 0) 20%, rgba(20, 1, 3, 0.65) 100%);
+      pointer-events: none;
+    }
+
+    /* Botón Flotante Radiante con animación de pulso */
+    .open-book-btn {
       position: relative;
-    }
-
-    .welcome-crown {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      border-radius: 50%;
-      border: 2px solid var(--dorado-calido);
-      box-shadow: 0 0 18px rgba(248, 225, 166, 0.8);
-      background: #ffffff;
-      padding: 5px;
-      margin: 0 auto 15px;
-    }
-
-    .welcome-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.6rem;
-      color: var(--dorado-brillo);
-      text-shadow: 0 0 15px rgba(248, 225, 166, 0.7);
-      margin-bottom: 4px;
-      font-weight: normal;
-    }
-
-    .welcome-subtitle {
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      color: var(--crema-marfil);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 25px;
-    }
-
-    /* BOTÓN TIPO SELLO DE CERA DEDICADO */
-    .open-btn {
-      background: radial-gradient(circle, #dbb782 0%, #a67c42 100%);
-      border: 2px solid #f8e1a6;
+      z-index: 10;
+      background: radial-gradient(circle, #f8e1a6 0%, #dbb782 60%, #9e7439 100%);
+      border: 2px solid #ffffff;
       border-radius: 50px;
-      padding: 15px 38px;
+      padding: 16px 36px;
+      box-shadow: 0 0 25px rgba(248, 225, 166, 0.9), 0 8px 25px rgba(0, 0, 0, 0.8);
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(248, 225, 166, 0.6);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: pulseGlow 2.2s infinite ease-in-out;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
 
-    .open-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 28px rgba(248, 225, 166, 0.9);
-    }
-
-    .open-btn span {
-      font-family: 'Cinzel', serif;
+    .open-book-btn span {
+      font-family: 'Cinzel Decorative', 'Cinzel', serif;
       font-weight: 800;
-      font-size: 1.1rem;
-      color: #200103;
-      letter-spacing: 2.5px;
+      font-size: 1.05rem;
+      color: #280103;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
     }
 
-    /* EFECTO DE DESTELLOS FLOTANTES EN EL FONDO */
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(248, 225, 166, 0.7), 0 8px 20px rgba(0,0,0,0.8);
+      }
+      50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 35px rgba(248, 225, 166, 1), 0 12px 28px rgba(0,0,0,0.9);
+      }
+    }
+
+    /* Pétalos cayendo dinámicamente en la portada */
+    .petal {
+      position: absolute;
+      top: -10%;
+      color: #d62828;
+      font-size: 1.4rem;
+      pointer-events: none;
+      animation: fall 7s linear infinite;
+      opacity: 0.85;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    @keyframes fall {
+      0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0.9; }
+      100% { top: 110%; transform: translateX(80px) rotate(360deg); opacity: 0.1; }
+    }
+
+    .pt-1 { left: 15%; animation-duration: 6s; animation-delay: 0s; }
+    .pt-2 { left: 40%; animation-duration: 8s; animation-delay: 2s; }
+    .pt-3 { left: 70%; animation-duration: 7s; animation-delay: 1s; }
+    .pt-4 { left: 88%; animation-duration: 9s; animation-delay: 3s; }
+
+    /* =========================================================
+       DESTELLOS FLOTANTES DEL FONDO PRINCIPAL
+       ========================================================= */
     .sparkle {
       position: fixed;
       color: var(--dorado-brillo);
@@ -254,7 +259,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* DEDICATORIA: CENTRADO PERFECTO Y MÁRGENES DE SEGURIDAD PARA LAS ROSAS */
+    /* DEDICATORIA EN PERGAMINO */
     .message-card {
       background-image: url('./pergamino.jpeg');
       background-size: 100% 100%;
@@ -589,17 +594,19 @@
 </head>
 <body>
 
-  <!-- PANTALLA PORTADA DE APERTURA (CUBIERTA / ENTRADA) -->
-  <div id="welcomeScreen">
-    <div class="welcome-card">
-      <img src="./corona.jpg" alt="Corona Real" class="welcome-crown">
-      <h1 class="welcome-title">Mis XV</h1>
-      <p class="welcome-subtitle">Maria Fernanda</p>
-      
-      <!-- BOTÓN PARA ABRIR E INICIAR MÚSICA -->
-      <button class="open-btn" onclick="openInvitation()">
-        <span>ABRIR ✉️</span>
-      </button>
+  <!-- PANTALLA DINÁMICA DE APERTURA (USANDO APERTURA.JPEG) -->
+  <div id="welcomeScreen" onclick="openInvitation()">
+    <div class="welcome-overlay"></div>
+    
+    <!-- Pétalos flotantes cayendo -->
+    <div class="petal pt-1">🌹</div>
+    <div class="petal pt-2">🌹</div>
+    <div class="petal pt-3">🌹</div>
+    <div class="petal pt-4">🌹</div>
+
+    <!-- Botón Pulsante Mágico -->
+    <div class="open-book-btn">
+      <span>TOCAR PARA ABRIR ✨</span>
     </div>
   </div>
 
@@ -627,13 +634,13 @@
       <h1 class="main-name">Maria Fernanda<br>Guadalupe<br>Cacho Valverde</h1>
       
       <div class="music-player">
-        <button class="play-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
+        <button class="play-btn" id="musicBtn" onclick="event.stopPropagation(); toggleMusic();">▶</button>
         <span style="font-size: 0.82rem; font-weight: 600; color: var(--crema-marfil); font-family: 'Montserrat', sans-serif;">Escuchar canción</span>
       </div>
       <audio id="bgMusic" loop preload="auto" src="./musica.mp3"></audio>
     </div>
 
-    <!-- Dedicatoria centrada y totalmente despejada de las flores y bordes -->
+    <!-- Dedicatoria perfectamente centrada en el pergamino -->
     <div class="message-card">
       <p>
         "Hoy celebro el comienzo de una etapa maravillosa e inolvidable en mi vida. Al llegar a mis quince años, miro hacia atrás con profunda gratitud por cada recuerdo feliz y miro hacia el futuro con ilusión por todos los sueños que están por venir.<br><br>
@@ -739,12 +746,13 @@
 
   </div>
 
-  <!-- JavaScript para Abrir Portada, Música y Reloj -->
+  <!-- JavaScript para Transición de Libro, Música y Reloj -->
   <script>
-    // Función para ocultar la portada e iniciar la música al instante
     function openInvitation() {
       const welcomeScreen = document.getElementById('welcomeScreen');
-      welcomeScreen.classList.add('hidden');
+      if (welcomeScreen) {
+        welcomeScreen.classList.add('hidden');
+      }
       
       const music = document.getElementById('bgMusic');
       const musicBtn = document.getElementById('musicBtn');
@@ -753,7 +761,7 @@
         music.play().then(() => {
           if (musicBtn) musicBtn.textContent = '❚❚';
         }).catch(err => {
-          console.log("Aviso de reproducción de audio:", err);
+          console.log("Aviso de sonido:", err);
         });
       }
     }
