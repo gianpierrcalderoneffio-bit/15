@@ -102,6 +102,16 @@
       position: relative;
     }
 
+    /* IMAGEN DE LA CORONA */
+    .crown-img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--dorado-calido);
+      box-shadow: 0 0 15px rgba(248, 225, 166, 0.8);
+    }
+
     /* ESTILO DEL NOMBRE PRINCIPAL */
     .main-name {
       font-family: 'Playfair Display', 'Cinzel', serif;
@@ -197,7 +207,7 @@
       text-transform: uppercase;
     }
 
-    /* ESTILO TIPOGRÁFICO DE PADRES Y PADRINOS (SIMILAR AL INICIO) */
+    /* ESTILO TIPOGRÁFICO DE PADRES Y PADRINOS */
     .names-list {
       font-family: 'Playfair Display', 'Cinzel', serif;
       font-size: 1.25rem;
@@ -281,6 +291,18 @@
       font-size: 2.5rem;
       color: var(--rojo-tinto);
       margin-bottom: 5px;
+    }
+
+    /* IMAGEN DEL CASTILLO */
+    .castle-img {
+      width: 75px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--dorado-calido);
+      box-shadow: 0 0 12px rgba(91, 6, 9, 0.4);
+      margin: 8px auto 10px;
+      display: block;
     }
 
     .venue-name {
@@ -392,20 +414,27 @@
     }
 
     .wax-seal {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       background: radial-gradient(circle, #dbb782 0%, #a67c42 100%);
       border: 2px solid #f8e1a6;
       border-radius: 50%;
       position: absolute;
-      top: -24px;
+      top: -26px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .seal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
     .rsvp-text {
@@ -433,7 +462,7 @@
       margin-top: 0;
     }
 
-    /* ROSA ENCANTADA FINAL (ÚNICA APARICIÓN EN LA INVITACIÓN) */
+    /* ROSA ENCANTADA FINAL (ÚNICA APARICIÓN) */
     .rose-image-large {
       width: 240px;
       height: 240px;
@@ -466,9 +495,9 @@
     <div class="header-dome-container">
       <div class="top-header-title">Mis Quince Años</div>
       
-      <!-- Cúpula Ilustrada -->
+      <!-- Cúpula Ilustrada con la Corona -->
       <div class="dome-frame">
-        <div style="font-size: 3.5rem; filter: drop-shadow(0 0 10px var(--dorado-brillo));">👑</div>
+        <img src="./corona.jpg" alt="Corona Real" class="crown-img">
       </div>
 
       <p style="font-family: 'Cinzel'; font-size: 0.82rem; letter-spacing: 2px; color: var(--crema-marfil); font-weight: 700; margin-top: 10px;">TIENEN EL HONOR DE INVITARLOS A CELEBRAR LOS XV AÑOS DE:</p>
@@ -527,10 +556,10 @@
     <!-- Título Cursivo "Los Detalles" -->
     <h2 class="details-title">Los Detalles</h2>
 
-    <!-- Tarjeta Recepción -->
+    <!-- Tarjeta Recepción con la Imagen del Castillo -->
     <div class="detail-card">
       <h3 class="detail-card-title">Recepción</h3>
-      <div style="font-size: 2.2rem; margin: 6px 0;">🏰</div>
+      <img src="./castillo.jpg" alt="Castillo Real" class="castle-img">
       <div class="venue-name">EVENTOS JV</div>
       <p class="detail-text" style="font-weight: 700; margin-bottom: 6px;">⏰ 7:00 PM</p>
       <p class="detail-text">
@@ -568,9 +597,11 @@
       </div>
     </div>
 
-    <!-- Confirmación de Asistencia (RSVP) -->
+    <!-- Confirmación de Asistencia (RSVP) con la Corona en el Sello -->
     <div class="rsvp-card">
-      <div class="wax-seal">👑</div>
+      <div class="wax-seal">
+        <img src="./corona.jpg" alt="Corona" class="seal-img">
+      </div>
       <p class="rsvp-text">Espero contar contigo en este día tan especial para mí</p>
       
       <div class="btn-group">
