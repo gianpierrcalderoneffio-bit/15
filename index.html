@@ -14,7 +14,8 @@
       --rojo-profundo: #280103;     /* Fondo principal */
       --dorado-calido: #dbb782;     /* Bordes y Acentos */
       --dorado-brillo: #f8e1a6;     /* Destellos */
-      --crema-marfil: #efe5d5;      /* Textos claros y tarjetas de detalles */
+      --crema-marfil: #e8dbc3;      /* Primer color de la imagen (Franja izquierda) */
+      --crema-claro: #f4ebd9;       /* Tono marfil muy claro para alto contraste */
     }
 
     * {
@@ -155,9 +156,9 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
-    /* Dedicatoria */
+    /* DEDICATORIA: Fondo con el primer color de la imagen (#e8dbc3) */
     .message-card {
-      background: linear-gradient(180deg, #f5ecd8 0%, var(--crema-marfil) 100%);
+      background: linear-gradient(180deg, var(--crema-claro) 0%, var(--crema-marfil) 100%);
       border: 2px solid var(--dorado-calido);
       outline: 1px solid rgba(91, 6, 9, 0.2);
       outline-offset: -6px;
@@ -209,7 +210,6 @@
       text-transform: uppercase;
     }
 
-    /* ESTILO TIPOGRÁFICO DE PADRES Y PADRINOS */
     .names-list {
       font-family: 'Playfair Display', 'Cinzel', serif;
       font-size: 1.25rem;
@@ -277,7 +277,7 @@
 
     /* Tarjetas Redondeadas "Los Detalles" */
     .detail-card {
-      background: linear-gradient(180deg, #fdf8ef 0%, #efe5d5 100%);
+      background: linear-gradient(180deg, #fdf8ef 0%, var(--crema-marfil) 100%);
       border: 2px solid var(--dorado-calido);
       outline: 1px solid rgba(91, 6, 9, 0.25);
       outline-offset: -5px;
@@ -329,7 +329,7 @@
     /* Botones Dorados */
     .btn-gold {
       display: inline-block;
-      background: linear-gradient(135deg, var(--crema-marfil) 0%, var(--dorado-calido) 50%, #c49c63 100%);
+      background: linear-gradient(135deg, var(--crema-claro) 0%, var(--dorado-calido) 50%, #c49c63 100%);
       color: #200103;
       font-family: 'Cinzel', serif;
       font-weight: 800;
@@ -383,7 +383,7 @@
     .gift-icon-container {
       width: 50px;
       height: 50px;
-      background: linear-gradient(135deg, #f5ecd8, var(--dorado-calido));
+      background: linear-gradient(135deg, var(--crema-claro), var(--dorado-calido));
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -405,7 +405,7 @@
 
     /* Tarjeta de Confirmación (RSVP) */
     .rsvp-card {
-      background: linear-gradient(180deg, #fdf8ef 0%, #efe5d5 100%);
+      background: linear-gradient(180deg, #fdf8ef 0%, var(--crema-marfil) 100%);
       border: 2px solid var(--dorado-calido);
       outline: 1px solid rgba(91, 6, 9, 0.25);
       outline-offset: -5px;
@@ -468,7 +468,7 @@
       margin-top: 0;
     }
 
-    /* ROSA ENCANTADA FINAL (ÚNICA APARICIÓN EN LA INVITACIÓN) */
+    /* ROSA ENCANTADA FINAL */
     .rose-image-large {
       width: 240px;
       height: 240px;
@@ -518,7 +518,7 @@
       <audio id="bgMusic" loop preload="auto" src="./musica.mp3"></audio>
     </div>
 
-    <!-- Dedicatoria -->
+    <!-- Dedicatoria en papel de fondo tono crema/marfil (#e8dbc3) -->
     <div class="message-card">
       <p>
         "Hoy celebro el comienzo de una etapa maravillosa e inolvidable en mi vida. Al llegar a mis quince años, miro hacia atrás con profunda gratitud por cada recuerdo feliz y miro hacia el futuro con ilusión por todos los sueños que están por venir.<br><br>
@@ -562,12 +562,12 @@
     <!-- Título Cursivo "Los Detalles" -->
     <h2 class="details-title">Los Detalles</h2>
 
-    <!-- Tarjeta Recepción con la Imagen del Castillo -->
+    <!-- Tarjeta Recepción con la Imagen del Castillo e indicación de las 8:00 PM -->
     <div class="detail-card">
       <h3 class="detail-card-title">Recepción</h3>
       <img src="./castillo.jpg" alt="Castillo Real" class="castle-img">
       <div class="venue-name">EVENTOS JV</div>
-      <p class="detail-text" style="font-weight: 700; margin-bottom: 6px;">⏰ 7:00 PM</p>
+      <p class="detail-text" style="font-weight: 700; margin-bottom: 6px;">⏰ 8:00 PM</p>
       <p class="detail-text">
         📍 <b>Dirección:</b><br>Torres del Pacífico 294, Carabayllo 15319
       </p>
@@ -603,7 +603,7 @@
       </div>
     </div>
 
-    <!-- Confirmación de Asistencia (RSVP) con la Corona en el Sello -->
+    <!-- Confirmación de Asistencia (RSVP) -->
     <div class="rsvp-card">
       <div class="wax-seal">
         <img src="./corona.jpg" alt="Corona" class="seal-img">
@@ -624,7 +624,7 @@
 
   </div>
 
-  <!-- JavaScript para Música y Reloj -->
+  <!-- JavaScript para Música y Reloj (Actualizado a las 20:00 / 8:00 PM) -->
   <script>
     function toggleMusic() {
       const music = document.getElementById('bgMusic');
@@ -646,7 +646,8 @@
       }
     }
 
-    const eventDate = new Date("2026-11-07T19:00:00").getTime();
+    /* Fecha y hora actualizadas: 7 de Noviembre de 2026 a las 20:00:00 (8:00 PM) */
+    const eventDate = new Date("2026-11-07T20:00:00").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
